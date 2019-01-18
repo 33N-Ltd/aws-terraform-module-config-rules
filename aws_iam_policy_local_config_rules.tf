@@ -1,6 +1,6 @@
-resource "aws_iam_policy" "local_config_rules" {
+resource "aws_iam_policy" "config_service_delivery_permission" {
   name        = "AWS-CONFIG-${upper(var.account_name)}-POLICY"
-  description = "Managed by Terraform: Policy used in trust relationship with AWS Config"
+  description = "Managed by Terraform: Allow AWS Config to delivery logs"
   path = "/service-role/"
-  policy = "${data.aws_iam_policy_document.lo.json}"
+  policy = "${data.aws_iam_policy_document.forrole.json}"
 }

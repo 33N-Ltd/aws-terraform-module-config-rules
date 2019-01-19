@@ -44,7 +44,7 @@ resource "aws_config_config_rule" "approved-amis-by-tag" {
 }
 
 #==================================================
-# 0.3	Ensure EBS volumes are atteched to an EC2 Instance
+# 0.2	Ensure EBS volumes are atteched to an EC2 Instance
 #==================================================
 resource "aws_config_config_rule" "ec2-volume-inuse-check" {
   name        = "ec2-volume-inuse-check"
@@ -62,7 +62,7 @@ resource "aws_config_config_rule" "ec2-volume-inuse-check" {
 }
 
 #==================================================
-# 0.4	Ensure EBS volumes that are in an attached state are encrypted.
+# 0.3	Ensure EBS volumes that are in an attached state are encrypted.
 #==================================================
 resource "aws_config_config_rule" "ec2-encrypted-volumes" {
   name        = "ec2-volumes-must-be-encrypted"
@@ -80,7 +80,7 @@ resource "aws_config_config_rule" "ec2-encrypted-volumes" {
 }
 
 #========================================== ========
-# 0.5	Checks whether security groups that are in use disallow unrestricted incoming TCP traffic to the specified ports.
+# 0.4	Checks whether security groups that are in use disallow unrestricted incoming TCP traffic to the specified ports.
 #==================================================
 resource "aws_config_config_rule" "restricted-common-ports" {
   name        = "restricted-common-ports"
@@ -99,7 +99,7 @@ resource "aws_config_config_rule" "restricted-common-ports" {
 }
 
 #==================================================
-# 0.6	Restrict SSH accessv via security groups.
+# 0.5	Restrict SSH accessv via security groups.
 #==================================================
 resource "aws_config_config_rule" "restricted-ssh" {
   name        = "restricted-ssh"
@@ -117,7 +117,7 @@ resource "aws_config_config_rule" "restricted-ssh" {
 }
 
 #==================================================
-# 0.7	Ensure RDS volume is encrypted.
+# 0.6	Ensure RDS volume is encrypted.
 #==================================================
 resource "aws_config_config_rule" "rds-storage-encrypted" {
   name        = "rds-storage-encrypted"
@@ -135,7 +135,7 @@ resource "aws_config_config_rule" "rds-storage-encrypted" {
 }
 
 #==================================================
-# 0.8	Ensure CloudTrail is enabled.
+# 0.7	Ensure CloudTrail is enabled.
 #==================================================
 resource "aws_config_config_rule" "cloudtrail-enabled" {
   name        = "cloudtrail-enabled"
@@ -155,7 +155,7 @@ resource "aws_config_config_rule" "cloudtrail-enabled" {
 }
 
 #==================================================
-# 0.10	Ensure Required tags are present on dependent resources
+# 0.8	Ensure Required tags are present on dependent resources
 #==================================================
 resource "aws_config_config_rule" "required-tags" {
   name        = "required-tags"
@@ -171,7 +171,7 @@ resource "aws_config_config_rule" "required-tags" {
 }
 
 #==================================================
-# 0.11 ACM Certificates Expiry notificaiton
+# 0.9 ACM Certificates Expiry notificaiton
 #==================================================
 resource "aws_config_config_rule" "acm-certificate-expiration-check" {
   name             = "acm-certificate-expiration-check"
@@ -192,7 +192,7 @@ resource "aws_config_config_rule" "acm-certificate-expiration-check" {
 }
 
 #==================================================
-# 0.12 Enforce password policy on all users
+# 0.10 Enforce password policy on all users
 #==================================================
 resource "aws_config_config_rule" "iam-password-policy" {
   name             = "iam-password-policy"
@@ -213,7 +213,7 @@ resource "aws_config_config_rule" "iam-password-policy" {
 }
 
 #==================================================
-# 0.13 Ensure IAM user is a member of at least 1 IAM group / role
+# 0.11 Ensure IAM user is a member of at least 1 IAM group / role
 #==================================================
 resource "aws_config_config_rule" "iam-user-no-policies-check" {
   name        = "iam-user-no-policies-check"
@@ -231,7 +231,7 @@ resource "aws_config_config_rule" "iam-user-no-policies-check" {
 }
 
 #==================================================
-# 0.15	Ensure the MFA is enaled on all root accounts.
+# 0.12	Ensure the MFA is enaled on all root accounts.
 #==================================================
 resource "aws_config_config_rule" "root-account-mfa-enabled" {
   name        = "root-account-mfa-enabled"
@@ -251,7 +251,7 @@ resource "aws_config_config_rule" "root-account-mfa-enabled" {
 }
 
 #==================================================
-# 0.16	Ensure that your Amazon S3 buckets do not allow public write access.
+# 0.13	Ensure that your Amazon S3 buckets do not allow public write access.
 #==================================================
 resource "aws_config_config_rule" "s3-public-bucket-not-writable" {
   name        = "s3-public-bucket-not-writable"

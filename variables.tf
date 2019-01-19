@@ -1,4 +1,7 @@
-variable "account_name" {}
+variable "account_name" {
+  description = "AWS account name."
+  type        = "string"
+}
 
 variable "config_logs_bucket" {
   description = "The S3 bucket for AWS Config logs."

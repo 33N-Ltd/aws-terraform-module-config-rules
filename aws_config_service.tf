@@ -16,7 +16,6 @@ resource "aws_config_configuration_recorder_status" "recorder_status" {
 resource "aws_config_delivery_channel" "delivery_channel" {
   name       = "AWS-CONFIG-DELIVERY-CHANNEL-${upper(var.account_name)}"
   s3_bucket_name = "config-rules-${data.aws_caller_identity.current.account_id}"
-  s3_key_prefix  = "${var.config_logs_prefix}"
 
   snapshot_delivery_properties = {
     delivery_frequency = "${var.config_delivery_frequency}"

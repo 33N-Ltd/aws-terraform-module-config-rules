@@ -3,17 +3,6 @@ variable "account_name" {
   type        = "string"
 }
 
-variable "config_logs_bucket" {
-  description = "The S3 bucket for AWS Config logs."
-  type        = "string"
-}
-
-variable "config_logs_prefix" {
-  description = "The S3 prefix for AWS Config logs."
-  default     = "config"
-  type        = "string"
-}
-
 variable "config_max_execution_frequency" {
   description = "The maximum frequency with which AWS Config runs evaluations for a rule."
   default     = "TwentyFour_Hours"
@@ -114,5 +103,6 @@ variable "common_tags" {
 variable "s3_bucket_force_destroy" {
   default = "false"
 }
+
 locals {
 }

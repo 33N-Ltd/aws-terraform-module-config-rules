@@ -160,7 +160,6 @@ resource "aws_config_config_rule" "cloudtrail-enabled" {
 resource "aws_config_config_rule" "required-tags" {
   name        = "required-tags"
   description = "Checks whether your resources have the tags that you specify. For example, you can check whether your EC2 instances have the 'CostCenter' tag. Separate multiple values with commas."
-  depends_on  = ["aws_config_configuration_recorder.config_recorder"]
 
   input_parameters = "${data.template_file.config_required_tags_policy.rendered}"
 
@@ -168,6 +167,11 @@ resource "aws_config_config_rule" "required-tags" {
     owner             = "AWS"
     source_identifier = "REQUIRED_TAGS"
   }
+
+  depends_on = [
+    "aws_config_configuration_recorder.recorder",
+    "aws_config_delivery_channel.delivery_channel",
+  ]
 }
 
 #==================================================
@@ -185,7 +189,7 @@ resource "aws_config_config_rule" "acm-certificate-expiration-check" {
 
   maximum_execution_frequency = "${var.config_max_execution_frequency}"
 
-    depends_on = [
+  depends_on = [
     "aws_config_configuration_recorder.recorder",
     "aws_config_delivery_channel.delivery_channel",
   ]

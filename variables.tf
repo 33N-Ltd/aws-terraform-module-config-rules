@@ -111,6 +111,8 @@ variable "blockedPort5" {
 variable "common_tags" {
   type = "map"
 }
-
+variable "s3_bucket_force_destroy" {
+  default = ""
+}
 locals {
 }

@@ -1,5 +1,5 @@
 data "template_file" "aws_config_iam_password_policy" {
-  template = "${file("${path.module}/config-policies/iam-password-policy.tpl")}"
+  template = "${file("${path.module}/config-policy-templates/iam-password-policy.tpl")}"
 
   vars = {
     # terraform will interpolate boolean as 0/1 and the config parameters expect "true" or "false"

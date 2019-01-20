@@ -1,5 +1,5 @@
 data "template_file" "config_required_tags_policy" {
-  template = "${file("${path.module}/policies/rule-required-tags-policy.tpl")}"
+  template = "${file("${path.module}/config-policy-templates/rule-required-tags-policy.tpl")}"
 
   vars = {
     tagValue1 = "${var.tag_value_1}"

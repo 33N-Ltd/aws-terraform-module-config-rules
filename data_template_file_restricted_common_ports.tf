@@ -1,5 +1,5 @@
 data "template_file" "aws_config_restricted_common_ports" {
-  template = "${file("${path.module}/config-policies/restricted-common-ports.tpl")}"
+  template = "${file("${path.module}/config-policy-templates/restricted-common-ports.tpl")}"
 
   vars = {
     "blockedPort1" = "${var.blockedPort1}"

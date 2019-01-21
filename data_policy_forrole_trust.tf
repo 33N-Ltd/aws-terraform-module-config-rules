@@ -5,7 +5,6 @@ data "aws_iam_policy_document" "forrole" {
 
     principals {
       type = "Service"
-
       identifiers = [
         "config.amazonaws.com",
       ]

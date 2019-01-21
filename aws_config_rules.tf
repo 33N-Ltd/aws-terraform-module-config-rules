@@ -27,6 +27,7 @@
 
 #==================================================
 # 0.1	Checks whether running instances are using specified AMIs.
+# TODO: add tag value from AMI builder.
 #==================================================
 resource "aws_config_config_rule" "approved-amis-by-tag" {
   name        = "approved-amis-by-tag"
@@ -156,6 +157,7 @@ resource "aws_config_config_rule" "cloudtrail-enabled" {
 
 #==================================================
 # 0.8	Ensure Required tags are present on dependent resources
+# TODO: split out resource left tagging based on tag and type of resource
 #==================================================
 resource "aws_config_config_rule" "required-tags" {
   name        = "required-tags"

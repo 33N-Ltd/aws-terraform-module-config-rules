@@ -155,26 +155,26 @@ resource "aws_config_config_rule" "cloudtrail-enabled" {
   ]
 }
 
-#==================================================
-# 0.8	Ensure Required tags are present on dependent resources
-# TODO: split out resource left tagging based on tag and type of resource
-#==================================================
-resource "aws_config_config_rule" "required-tags" {
-  name        = "required-tags"
-  description = "Checks whether your resources have the tags that you specify. For example, you can check whether your EC2 instances have the 'CostCenter' tag. Separate multiple values with commas."
-
-  input_parameters = "${data.template_file.config_required_tags_policy.rendered}"
-
-  source {
-    owner             = "AWS"
-    source_identifier = "REQUIRED_TAGS"
-  }
-
-  depends_on = [
-    "aws_config_configuration_recorder.recorder",
-    "aws_config_delivery_channel.delivery_channel",
-  ]
-}
+//#==================================================
+//# 0.8	Ensure Required tags are present on dependent resources
+//# TODO: split out resource left tagging based on tag and type of resource
+//#==================================================
+//resource "aws_config_config_rule" "required-tags" {
+//  name        = "required-tags"
+//  description = "Checks whether your resources have the tags that you specify. For example, you can check whether your EC2 instances have the 'CostCenter' tag. Separate multiple values with commas."
+//
+//  input_parameters = "${data.template_file.config_required_tags_policy.rendered}"
+//
+//  source {
+//    owner             = "AWS"
+//    source_identifier = "REQUIRED_TAGS"
+//  }
+//
+//  depends_on = [
+//    "aws_config_configuration_recorder.recorder",
+//    "aws_config_delivery_channel.delivery_channel",
+//  ]
+//}
 
 #==================================================
 # 0.9 ACM Certificates Expiry notificaiton

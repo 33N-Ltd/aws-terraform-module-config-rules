@@ -205,11 +205,7 @@ resource "aws_config_config_rule" "iam-password-policy" {
   }
 
   maximum_execution_frequency = "${var.config_max_execution_frequency}"
-
-  depends_on = [
-    "aws_config_configuration_recorder.recorder",
-    "aws_config_delivery_channel.delivery_channel",
-  ]
+  depends_on = ["aws_config_configuration_recorder.main"]
 }
 
 #==================================================

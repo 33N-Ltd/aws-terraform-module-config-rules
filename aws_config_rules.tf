@@ -27,11 +27,11 @@
 
 #==================================================
 # 0.1	Checks whether running instances are using specified AMIs.
-# TODO: add tag value from AMI builder.
 #==================================================
 resource "aws_config_config_rule" "approved-amis-by-tag" {
   name        = "approved-amis-by-tag"
   description = "Managed by Terraform: Checks whether running instances are using specified AMIs. Running instances that dont have at least one of the specified tags are noncompliant"
+  input_parameters = "${data.template_file.aws_config_ami_approved_tag.rendered}"
 
   source {
     owner             = "AWS"

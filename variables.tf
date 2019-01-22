@@ -3,6 +3,11 @@ variable "account_name" {
   type        = "string"
 }
 
+variable "ami_tagKey_tagValue" {
+  description = "Tag key and value which AMI has to have to be compliant: Example: tag-key:tag-value"
+  type        = "string"
+}
+
 variable "config_max_execution_frequency" {
   description = "The maximum frequency with which AWS Config runs evaluations for a rule."
   default     = "TwentyFour_Hours"

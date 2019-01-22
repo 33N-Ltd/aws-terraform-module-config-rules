@@ -4,7 +4,6 @@ module "config_bucket" {
   s3_bucket_policy        = "${data.template_file.config_rules_bucket_policy.rendered}"
   s3_bucket_force_destroy = "${var.s3_bucket_force_destroy}"
   common_tags             = "${var.common_tags}"
-  //todo: fixed the service side encryption on bucket.
 }
 
 resource "aws_config_configuration_recorder_status" "recorder_status" {

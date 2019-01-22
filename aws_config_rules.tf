@@ -38,10 +38,7 @@ resource "aws_config_config_rule" "approved-amis-by-tag" {
     source_identifier = "APPROVED_AMIS_BY_TAG"
   }
 
-  depends_on = [
-    "aws_config_configuration_recorder.recorder",
-    "aws_config_delivery_channel.delivery_channel",
-  ]
+  depends_on = ["aws_config_configuration_recorder.main"]
 }
 
 #==================================================
@@ -56,10 +53,7 @@ resource "aws_config_config_rule" "ec2-volume-inuse-check" {
     source_identifier = "EC2_VOLUME_INUSE_CHECK"
   }
 
-  depends_on = [
-    "aws_config_configuration_recorder.recorder",
-    "aws_config_delivery_channel.delivery_channel",
-  ]
+  depends_on = ["aws_config_configuration_recorder.main"]
 }
 
 #==================================================
@@ -74,10 +68,7 @@ resource "aws_config_config_rule" "ec2-encrypted-volumes" {
     source_identifier = "ENCRYPTED_VOLUMES"
   }
 
-  depends_on = [
-    "aws_config_configuration_recorder.recorder",
-    "aws_config_delivery_channel.delivery_channel",
-  ]
+  depends_on = ["aws_config_configuration_recorder.main"]
 }
 
 #========================================== ========
@@ -93,10 +84,7 @@ resource "aws_config_config_rule" "restricted-common-ports" {
     source_identifier = "RESTRICTED_INCOMING_TRAFFIC"
   }
 
-  depends_on = [
-    "aws_config_configuration_recorder.recorder",
-    "aws_config_delivery_channel.delivery_channel",
-  ]
+  depends_on = ["aws_config_configuration_recorder.main"]
 }
 
 #==================================================
@@ -111,10 +99,7 @@ resource "aws_config_config_rule" "restricted-ssh" {
     source_identifier = "INCOMING_SSH_DISABLED"
   }
 
-  depends_on = [
-    "aws_config_configuration_recorder.recorder",
-    "aws_config_delivery_channel.delivery_channel",
-  ]
+  depends_on = ["aws_config_configuration_recorder.main"]
 }
 
 #==================================================
@@ -129,10 +114,7 @@ resource "aws_config_config_rule" "rds-storage-encrypted" {
     source_identifier = "RDS_STORAGE_ENCRYPTED"
   }
 
-  depends_on = [
-    "aws_config_configuration_recorder.recorder",
-    "aws_config_delivery_channel.delivery_channel",
-  ]
+  depends_on = ["aws_config_configuration_recorder.main"]
 }
 
 #==================================================
@@ -149,10 +131,7 @@ resource "aws_config_config_rule" "cloudtrail-enabled" {
 
   maximum_execution_frequency = "${var.config_max_execution_frequency}"
 
-  depends_on = [
-    "aws_config_configuration_recorder.recorder",
-    "aws_config_delivery_channel.delivery_channel",
-  ]
+  depends_on = ["aws_config_configuration_recorder.main"]
 }
 
 #==================================================
@@ -191,10 +170,7 @@ resource "aws_config_config_rule" "required-tag-name" {
       "AWS::S3::Bucket",
     ]
   }
-  depends_on = [
-    "aws_config_configuration_recorder.recorder",
-    "aws_config_delivery_channel.delivery_channel",
-  ]
+  depends_on = ["aws_config_configuration_recorder.main"]
 }
 
 #==================================================
@@ -212,10 +188,7 @@ resource "aws_config_config_rule" "acm-certificate-expiration-check" {
 
   maximum_execution_frequency = "${var.config_max_execution_frequency}"
 
-  depends_on = [
-    "aws_config_configuration_recorder.recorder",
-    "aws_config_delivery_channel.delivery_channel",
-  ]
+  depends_on = ["aws_config_configuration_recorder.main"]
 }
 
 #==================================================
@@ -251,10 +224,7 @@ resource "aws_config_config_rule" "iam-user-no-policies-check" {
     source_identifier = "IAM_USER_NO_POLICIES_CHECK"
   }
 
-  depends_on = [
-    "aws_config_configuration_recorder.recorder",
-    "aws_config_delivery_channel.delivery_channel",
-  ]
+  depends_on = ["aws_config_configuration_recorder.main"]
 }
 
 #==================================================
@@ -271,10 +241,7 @@ resource "aws_config_config_rule" "root-account-mfa-enabled" {
 
   maximum_execution_frequency = "${var.config_max_execution_frequency}"
 
-  depends_on = [
-    "aws_config_configuration_recorder.recorder",
-    "aws_config_delivery_channel.delivery_channel",
-  ]
+  depends_on = ["aws_config_configuration_recorder.main"]
 }
 
 #==================================================
@@ -289,8 +256,5 @@ resource "aws_config_config_rule" "s3-public-bucket-not-writable" {
     source_identifier = "S3_BUCKET_PUBLIC_WRITE_PROHIBITED"
   }
 
-  depends_on = [
-    "aws_config_configuration_recorder.recorder",
-    "aws_config_delivery_channel.delivery_channel",
-  ]
+  depends_on = ["aws_config_configuration_recorder.main"]
 }

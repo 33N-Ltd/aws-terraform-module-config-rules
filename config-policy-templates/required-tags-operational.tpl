@@ -1,5 +1,5 @@
 {
-    "tag1Key":"Backup"
-    "tag2Key":"Deployer"
+    "tag1Key": "Backup"
+    "tag2Key": "Deployer"
 }
 

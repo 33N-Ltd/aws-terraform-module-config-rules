@@ -174,29 +174,7 @@ resource "aws_config_config_rule" "required-tag-name" {
 }
 
 #==================================================
-# 0.8.B Ensure Technical tags are present on dependent resources
-#==================================================
-resource "aws_config_config_rule" "required-technial-tags" {
-  name = "required-technial-tags"
-  description = "Checks whether your resources have the Name tag that you specify."
-
-  input_parameters = "${data.template_file.config_required_technical_tags_policy.rendered}"
-
-  source {
-    owner = "AWS"
-    source_identifier = "REQUIRED_TAGS"
-  }
-
-  scope {
-    compliance_resource_types = [
-      "AWS::EC2::Instance",
-    ]
-  }
-  depends_on = ["aws_config_configuration_recorder.recorder"]
-}
-
-#==================================================
-# 0.8.C Ensure business tags are present on dependent resources
+# 0.8.B Ensure business tags are present on dependent resources
 #==================================================
 resource "aws_config_config_rule" "required-business-tags" {
   name = "required-business-tags"
@@ -213,6 +191,50 @@ resource "aws_config_config_rule" "required-business-tags" {
     compliance_resource_types = [
       "AWS::EC2::Instance",
       "AWS::EC2::Volume",
+    ]
+  }
+  depends_on = ["aws_config_configuration_recorder.recorder"]
+}
+
+#==================================================
+# 0.8.C Ensure Operational tags are present on dependent resources
+#==================================================
+resource "aws_config_config_rule" "required-operational-tags" {
+  name = "required-operational-tags"
+  description = "Checks whether your resources have the operational tags that you specify."
+
+  input_parameters = "${data.template_file.config_required_operational_tags_policy.rendered}"
+
+  source {
+    owner = "AWS"
+    source_identifier = "REQUIRED_TAGS"
+  }
+
+  scope {
+    compliance_resource_types = [
+      "AWS::EC2::Instance",
+    ]
+  }
+  depends_on = ["aws_config_configuration_recorder.recorder"]
+}
+
+#==================================================
+# 0.8.D Ensure Technical tags are present on dependent resources
+#==================================================
+resource "aws_config_config_rule" "required-technial-tags" {
+  name = "required-technial-tags"
+  description = "Checks whether your resources have the technical tag that you specify."
+
+  input_parameters = "${data.template_file.config_required_technical_tags_policy.rendered}"
+
+  source {
+    owner = "AWS"
+    source_identifier = "REQUIRED_TAGS"
+  }
+
+  scope {
+    compliance_resource_types = [
+      "AWS::EC2::Instance",
     ]
   }
   depends_on = ["aws_config_configuration_recorder.recorder"]

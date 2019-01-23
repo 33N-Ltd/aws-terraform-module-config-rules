@@ -1,15 +1,13 @@
 #this is the trust relationship
-data "aws_iam_policy_document" "forrole" {
+data "aws_iam_policy_document" "aws-config-role-policy" {
   statement {
-    effect = "Allow"
+    actions = ["sts:AssumeRole"]
 
     principals {
-      type = "Service"
-      identifiers = [
-        "config.amazonaws.com",
-      ]
+      type        = "Service"
+      identifiers = ["config.amazonaws.com"]
     }
 
-    actions = ["sts:AssumeRole"]
+    effect = "Allow"
   }
 }

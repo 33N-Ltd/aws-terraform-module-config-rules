@@ -5,11 +5,11 @@
 # Please refer to the OSO Base Config Rules document for further information.
 # The table below maps the RuleSets and the Rule:
 #
-# | ---"| ----------------------------------------"| ---------------"|
+# | -----|-------------------------------------------|------------------|
 # |      |                                           | Baseline RuleSet |
 # | Id   | Rule Name                                 | by Account       |
 # |      |                                           | Classification   |
-# | ---"| ----------------------------------------"| ---------------"|
+# | -----|-------------------------------------------|------------------|
 # | 0.1  | approved-amis-by-tag                      | All              |
 # | 0.2  | ec2-volume-inuse-check                    | All              |
 # | 0.3  | ec2-encrypted-volumes                     | All              |
@@ -23,7 +23,7 @@
 # | 0.11 | iam-user-group-membership-check           | All              |
 # | 0.12 | root-account-mfa-enabled                  | All              |
 # | 0.13 | s3-bucket-public-write-prohibited         | All              |
-# | ---"| ----------------------------------------"| ---------------"|
+# | ---- | ------------------------------------------| -----------------|
 
 #==================================================
 # 0.1	Checks whether running instances are using specified AMIs.
@@ -38,7 +38,7 @@ resource "aws_config_config_rule" "approved-amis-by-tag" {
     source_identifier = "APPROVED_AMIS_BY_TAG"
   }
 
-  depends_on = ["aws_config_configuration_recorder.main"]
+  depends_on = ["aws_config_configuration_recorder.recorder"]
 }
 
 #==================================================
@@ -53,7 +53,7 @@ resource "aws_config_config_rule" "ec2-volume-inuse-check" {
     source_identifier = "EC2_VOLUME_INUSE_CHECK"
   }
 
-  depends_on = ["aws_config_configuration_recorder.main"]
+  depends_on = ["aws_config_configuration_recorder.recorder"]
 }
 
 #==================================================
@@ -68,7 +68,7 @@ resource "aws_config_config_rule" "ec2-encrypted-volumes" {
     source_identifier = "ENCRYPTED_VOLUMES"
   }
 
-  depends_on = ["aws_config_configuration_recorder.main"]
+  depends_on = ["aws_config_configuration_recorder.recorder"]
 }
 
 #========================================== ========
@@ -84,7 +84,7 @@ resource "aws_config_config_rule" "restricted-common-ports" {
     source_identifier = "RESTRICTED_INCOMING_TRAFFIC"
   }
 
-  depends_on = ["aws_config_configuration_recorder.main"]
+  depends_on = ["aws_config_configuration_recorder.recorder"]
 }
 
 #==================================================
@@ -99,7 +99,7 @@ resource "aws_config_config_rule" "restricted-ssh" {
     source_identifier = "INCOMING_SSH_DISABLED"
   }
 
-  depends_on = ["aws_config_configuration_recorder.main"]
+  depends_on = ["aws_config_configuration_recorder.recorder"]
 }
 
 #==================================================
@@ -114,7 +114,7 @@ resource "aws_config_config_rule" "rds-storage-encrypted" {
     source_identifier = "RDS_STORAGE_ENCRYPTED"
   }
 
-  depends_on = ["aws_config_configuration_recorder.main"]
+  depends_on = ["aws_config_configuration_recorder.recorder"]
 }
 
 #==================================================
@@ -131,11 +131,11 @@ resource "aws_config_config_rule" "cloudtrail-enabled" {
 
   maximum_execution_frequency = "${var.config_max_execution_frequency}"
 
-  depends_on = ["aws_config_configuration_recorder.main"]
+  depends_on = ["aws_config_configuration_recorder.recorder"]
 }
 
 #==================================================
-# 0.8.A Ensure Name taga are present on dependent resources
+# 0.8.A Ensure Name tags are present on dependent resources
 #==================================================
 resource "aws_config_config_rule" "required-tag-name" {
   name = "required-tag-name"
@@ -170,7 +170,52 @@ resource "aws_config_config_rule" "required-tag-name" {
       "AWS::S3::Bucket",
     ]
   }
-  depends_on = ["aws_config_configuration_recorder.main"]
+  depends_on = ["aws_config_configuration_recorder.recorder"]
+}
+
+#==================================================
+# 0.8.B Ensure Technical tags are present on dependent resources
+#==================================================
+resource "aws_config_config_rule" "required-technial-tags" {
+  name = "required-technial-tags"
+  description = "Checks whether your resources have the Name tag that you specify."
+
+  input_parameters = "${data.template_file.config_required_technical_tags_policy.rendered}"
+
+  source {
+    owner = "AWS"
+    source_identifier = "REQUIRED_TAGS"
+  }
+
+  scope {
+    compliance_resource_types = [
+      "AWS::EC2::Instance",
+    ]
+  }
+  depends_on = ["aws_config_configuration_recorder.recorder"]
+}
+
+#==================================================
+# 0.8.C Ensure business tags are present on dependent resources
+#==================================================
+resource "aws_config_config_rule" "required-business-tags" {
+  name = "required-business-tags"
+  description = "Checks whether your resources have the business tags that you specify."
+
+  input_parameters = "${data.template_file.config_required_business_tags_policy.rendered}"
+
+  source {
+    owner = "AWS"
+    source_identifier = "REQUIRED_TAGS"
+  }
+
+  scope {
+    compliance_resource_types = [
+      "AWS::EC2::Instance",
+      "AWS::EC2::Volume",
+    ]
+  }
+  depends_on = ["aws_config_configuration_recorder.recorder"]
 }
 
 #==================================================
@@ -188,7 +233,7 @@ resource "aws_config_config_rule" "acm-certificate-expiration-check" {
 
   maximum_execution_frequency = "${var.config_max_execution_frequency}"
 
-  depends_on = ["aws_config_configuration_recorder.main"]
+  depends_on = ["aws_config_configuration_recorder.recorder"]
 }
 
 #==================================================
@@ -205,7 +250,7 @@ resource "aws_config_config_rule" "iam-password-policy" {
   }
 
   maximum_execution_frequency = "${var.config_max_execution_frequency}"
-  depends_on = ["aws_config_configuration_recorder.main"]
+  depends_on = ["aws_config_configuration_recorder.recorder"]
 }
 
 #==================================================
@@ -220,7 +265,7 @@ resource "aws_config_config_rule" "iam-user-no-policies-check" {
     source_identifier = "IAM_USER_NO_POLICIES_CHECK"
   }
 
-  depends_on = ["aws_config_configuration_recorder.main"]
+  depends_on = ["aws_config_configuration_recorder.recorder"]
 }
 
 #==================================================
@@ -237,7 +282,7 @@ resource "aws_config_config_rule" "root-account-mfa-enabled" {
 
   maximum_execution_frequency = "${var.config_max_execution_frequency}"
 
-  depends_on = ["aws_config_configuration_recorder.main"]
+  depends_on = ["aws_config_configuration_recorder.recorder"]
 }
 
 #==================================================
@@ -252,5 +297,5 @@ resource "aws_config_config_rule" "s3-public-bucket-not-writable" {
     source_identifier = "S3_BUCKET_PUBLIC_WRITE_PROHIBITED"
   }
 
-  depends_on = ["aws_config_configuration_recorder.main"]
+  depends_on = ["aws_config_configuration_recorder.recorder"]
 }

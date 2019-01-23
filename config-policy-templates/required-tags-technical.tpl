@@ -1,3 +1,5 @@
 {
-	"daysToExpiration": "${acm_days_to_expiration}"
+    "tag1Key": "Network"
+    "tag2Key": "Environment"
 }
+

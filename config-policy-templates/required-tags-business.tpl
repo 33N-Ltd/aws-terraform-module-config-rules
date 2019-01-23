@@ -1,3 +1,4 @@
 {
-	"daysToExpiration": "${acm_days_to_expiration}"
+	"tag1Key":"Application"
+    "tag2Key":"SquadName"
 }

@@ -1,4 +1,4 @@
 {
-	"tag1Key": "Application"
+	"tag1Key": "Application",
     "tag2Key": "SquadName"
 }

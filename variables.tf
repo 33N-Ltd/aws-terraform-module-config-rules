@@ -60,22 +60,6 @@ variable "password_max_age" {
   default     = 90
 }
 
-// require-tags
-variable "tag_value_1" {
-  description = "resource tag."
-  default     = ""
-}
-
-variable "tag_value_2" {
-  description = "resource tag."
-  default     = ""
-}
-
-variable "tag_value_3" {
-  description = "resource tag."
-  default     = ""
-}
-
 // restricted-common-ports
 variable "blockedPort1" {
   description = "Blocked TCP port number."

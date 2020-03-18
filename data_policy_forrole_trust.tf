@@ -11,3 +11,4 @@ data "aws_iam_policy_document" "aws-config-role-policy" {
     effect = "Allow"
   }
 }
+

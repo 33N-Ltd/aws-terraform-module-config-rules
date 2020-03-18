@@ -1,23 +1,23 @@
 variable "account_name" {
   description = "AWS account name."
-  type        = "string"
+  type        = string
 }
 
 variable "ami_tagKey_tagValue" {
   description = "Tag key and value which AMI has to have to be compliant: Example: tag-key:tag-value"
-  type        = "string"
+  type        = string
 }
 
 variable "config_max_execution_frequency" {
   description = "The maximum frequency with which AWS Config runs evaluations for a rule."
   default     = "TwentyFour_Hours"
-  type        = "string"
+  type        = string
 }
 
 variable "config_delivery_frequency" {
   description = "The frequency with which AWS Config delivers configuration snapshots."
   default     = "Six_Hours"
-  type        = "string"
+  type        = string
 }
 
 variable "acm_days_to_expiration" {
@@ -87,11 +87,13 @@ variable "blockedPort5" {
 }
 
 variable "common_tags" {
-  type = "map"
+  type = map(string)
 }
+
 variable "s3_bucket_force_destroy" {
   default = "false"
 }
 
 locals {
 }
+

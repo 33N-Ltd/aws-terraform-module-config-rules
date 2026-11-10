@@ -93,7 +93,3 @@ variable "common_tags" {
 variable "s3_bucket_force_destroy" {
   default = "false"
 }
-
-locals {
-}
-

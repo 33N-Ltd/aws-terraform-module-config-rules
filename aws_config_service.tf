@@ -1,7 +1,7 @@
 module "config_bucket" {
-  source                  = "git::https://github.com/33N-Ltd/aws-terraform-module-s3.git"
+  source                  = "git::https://github.com/33N-Ltd/aws-terraform-module-s3.git?ref=0bb44734861ee38205153b993b593c6c70b6ea40"
   s3_bucket_name          = "config-rules-${data.aws_caller_identity.current.account_id}"
-  s3_bucket_policy        = data.template_file.config_rules_bucket_policy.rendered
+  s3_bucket_policy        = local.config_rules_bucket_policy
   s3_bucket_force_destroy = var.s3_bucket_force_destroy
   common_tags             = var.common_tags
 }

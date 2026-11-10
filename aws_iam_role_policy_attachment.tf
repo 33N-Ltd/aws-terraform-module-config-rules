@@ -1,6 +1,6 @@
 resource "aws_iam_policy" "aws-config-policy" {
   name   = "aws-config-policy"
-  policy = data.template_file.config_rules_policy.rendered
+  policy = local.config_rules_policy
 }
 
 resource "aws_iam_policy_attachment" "aws-config-policy" {
